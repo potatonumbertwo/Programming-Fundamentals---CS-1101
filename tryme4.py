@@ -21,15 +21,18 @@ def nine_lines():  # define a function named nine_lines
 
 def clear_screen():  # add a function named clear_screen
 
-    # function body combines nine_lines,three_lines,new_line
-    # to get
+
+# function body combines nine_lines,three_lines,new_line
+# to get
+
+
     nine_lines()
 
+    print('nine lines')
     nine_lines()
     three_lines()
     three_lines()
     new_line()
-
 
 # nine_lines()  # call the nine_lines()function to print out 9 lines code
 # three_lines()  # call the three_lines function will print out 3 dot
@@ -86,6 +89,3 @@ output:
 # print_volume(5)
 # print_volume(2)
 # print_volume(7)
-
-
-

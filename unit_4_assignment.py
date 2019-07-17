@@ -1,14 +1,16 @@
 def is_power(a, b):
     """ define a function that a is a power of b if a is divisible by b
     and a/b is a power of b ,returns True if a is a power of b"""
-    isADivisibleByB = is_divisible(a, b) == 1
-    isADiviedByBIsPowerofB = (a / b) % b == 0
-    if isADivisibleByB and isADiviedByBIsPowerofB:
+
+    if a == b:
         return True
-    # if a == b:
-    #     return True
-    # if b == 1:
-    #     return False
+    if b == 1:
+        return False
+    isADivisibleByB = is_divisible(a, b) == 1
+    isADiviedByBIsPowerofB = a / b % b == 0
+    if isADivisibleByB and isADiviedByBIsPowerofB:
+        return is_power(a / b, b)
+    #
     else:
         return False
 
@@ -27,20 +29,9 @@ def is_divisible(x, y):
         return False
 
 
-# def is_power(a, b):
-#     if a == b:
-#         return True
-#     if b == 1:
-#         return False
-#     elif a % b != 0:
-#         return False
-#     else:
-#         return is_power(a / b, b)
-
-
-# print("is_power(10, 2) returns: ", is_power(10, 2))
-# print("is_power(27, 3) returns: ", is_power(27, 3))
+print("is_power(10, 2) returns: ", is_power(10, 2))
+print("is_power(27, 3) returns: ", is_power(27, 3))
 print("is_power(1, 1) returns: ", is_power(1, 1))
-# print("is_power(10, 1) returns: ", is_power(10, 1))
-# print("is_power(3, 3) returns: ", is_power(3, 3))
-# print(is_power(64, 2))
+print("is_power(10, 1) returns: ", is_power(10, 1))
+print("is_power(3, 3) returns: ", is_power(3, 3))
+

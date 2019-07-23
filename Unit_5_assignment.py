@@ -19,8 +19,10 @@ def test_sqrt():
 
         diff = abs(math_sqrt - float(mysqrt))
 
-        print('a = ' + str(i) + ' | ' + 'my_sqrt(' + str(i) + ') = ' + str(my_sqrt(i)) + ' | ' + 'math.sqrt(' + str(
-            i) + ') = ' + str(math.sqrt(i)) + ' | ' 'diff = ' + str(diff))
+        # print('a = ' + str(i) + ' | ' + 'my_sqrt(' + str(i) + ') = ' + str(my_sqrt(i)) + ' | ' + 'math.sqrt(' + str(
+        #     i) + ') = ' + str(math.sqrt(i)) + ' | ' 'diff = ' + str(diff))
+
+        # print('{}, {}, {},{}'.format(a=i, my_sqrt=mysqrt, math_sqrt=math_sqrt, diff=diff))
 
 
 test_sqrt()

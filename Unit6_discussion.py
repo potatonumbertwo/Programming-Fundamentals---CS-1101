@@ -172,3 +172,95 @@ Identical is that two list have the some object
 #         b += 1
 #     a += 1
 # print(total)
+
+
+# milk = ['white']
+# chalk = ['white']
+#
+# print(milk is chalk)
+
+
+# s = "help"
+# for letter in s[1:]:
+#       last = letter
+#       break
+# print(last)
+#
+#
+# pi = int(3.14159)
+# print (pi)
+
+
+# n = 10
+# while n != 1:
+#     print(n,)
+#     if n % 2 == 0: # n is even
+#         n = n / 2
+#     else: # n is odd
+#         n = n * 3 + 1
+
+
+# s = "Python3"
+# print(s[len(s)])
+
+
+# x=1
+# y=2
+# if x == y:
+#     print (x, "and", y, "are equal")
+# else:
+#     if x < y:
+#         print (x, "is less than", y)
+#     else:
+#         print (x, "is greater than", y)
+# def is_divisible(x, y):
+#     return (x % y) == 0
+#
+#
+# print(is_divisible(4, 2))
+#
+# pi = float(3.14159)
+# print(pi)
+#
+#
+# def area(l, w):
+#     temp = l * w
+#     return temp
+#
+#
+# l = 4.0
+# w = 3.25
+# x = area(l, w)
+# if (x):
+#     print(x)
+
+# word = 'bAnana'
+#
+# index = word.find('a')
+# print(index)
+
+#
+# def print_n(s, n):
+#     if n > 0:
+#         print(s)
+#         print_n(s, n - 1)
+#     return n
+#
+#
+# n = 3
+# while print_n("hi", n):
+#     print_n("there!", n)
+#     n = 0
+
+
+s = "help"
+for letter in s[1:]:
+    last = letter
+    break
+print(last)
+
+print('Unit 6'[-1])
+
+n = 2
+n += 5
+print(n)

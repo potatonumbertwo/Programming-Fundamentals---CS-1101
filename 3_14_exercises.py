@@ -31,8 +31,12 @@ def histogram(s):
 def has_duplicates(string_to_analysis):
     """ define a function called has_duplicates that takes a string parameter and
        returns True if the string has any repeated characters. Otherwise,return False"""
-    for sting in test_dups:
-        return True
+    histogram_dict = histogram(string_to_analysis)
+    for frequency in histogram_dict.values():
+        if frequency > 1:
+            return True
+
+    return False
 
 
 def test_and_print(strings_list):

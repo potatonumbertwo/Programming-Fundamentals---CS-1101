@@ -49,8 +49,9 @@ print(key)
 
 # 12.5 Lists and tuples
 '''
-Tuple can be useful with loops over list because zip function returns a list of tuple
-each tuple can contain a element corresponding with another element from the lists
+Tuple can be useful with loops over list because zip function 
+returns a list of tuple each tuple can contain a element 
+corresponding with another element from the lists
 '''
 
 items = ['potato', 'apple pair', 'banana', 'steak']
@@ -117,3 +118,5 @@ science 95
 physics 100
 chemistry 3
 '''
+my_list = [3, 2, 1]
+print(my_list.sort())

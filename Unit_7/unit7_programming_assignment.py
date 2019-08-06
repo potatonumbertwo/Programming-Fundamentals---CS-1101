@@ -18,11 +18,11 @@ class Unit7:
 
     # print(histogram())
 
-    def has_duplicates(self, stringToAnalyze):
+    def has_duplicates(self, string_to_analyze):
         """ define a function called has_duplicates that takes a string parameter and
         returns True if the string has any repeated characters. Otherwise,return False"""
-        for i in enumerate(stringToAnalyze):
-            if histogram('') in i:
+        for i in enumerate(string_to_analyze):
+            histogram
                 return True
 
     # print(has_duplicates())

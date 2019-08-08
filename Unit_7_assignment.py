@@ -13,23 +13,23 @@ def histogram(s):
     return d
 
 
-# def has_duplicates(string_to_analysis):
-#     """ define a function called has_duplicates that takes a string parameter and
-#        returns True if the string has any repeated characters. Otherwise,return False"""
-#     histogram_dict = histogram(string_to_analysis)
-#     for frequency in histogram_dict.values():
-#         if frequency > 1:
-#             return True
-#
-#     return False
-#
-#
-# for string in test_dups:
-#     output = has_duplicates(string)
-#     if output is True:
-#         print(string + ' has duplicates')
-#     else:
-#         print(string + ' has no duplicates')
+def has_duplicates(string_to_analysis):
+    """ define a function called has_duplicates that takes a string parameter and
+       returns True if the string has any repeated characters. Otherwise,return False"""
+    histogram_dict = histogram(string_to_analysis)
+    for frequency in histogram_dict.values():
+        if frequency > 1:
+            return True
+
+    return False
+
+
+for string in test_dups:
+    output = has_duplicates(string)
+    if output is True:
+        print(string + ' has duplicates')
+    else:
+        print(string + ' has no duplicates')
 
 
 def missing_letters(string):
@@ -46,9 +46,6 @@ def missing_letters(string):
     return missing_letters_string
 
 
-# def test_miss_letters():
 for word in test_miss:
     missed_letters_in_word = missing_letters(word)
     print(missed_letters_in_word)
-
-# test_miss_letters()

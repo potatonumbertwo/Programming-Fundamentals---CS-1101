@@ -48,4 +48,5 @@ def missing_letters(string):
 
 for word in test_miss:
     missed_letters_in_word = missing_letters(word)
+    print(test_miss[word])
     print(missed_letters_in_word)

@@ -48,5 +48,7 @@ def missing_letters(string):
 
 for word in test_miss:
     missed_letters_in_word = missing_letters(word)
-
-    print(word + ' has missed word ' + missed_letters_in_word)
+    if len(missed_letters_in_word) > 1:
+        print(word + ' has missed word ' + missed_letters_in_word)
+    if len(missed_letters_in_word) == 0:
+        print(word + ' used all letters ' + missed_letters_in_word)

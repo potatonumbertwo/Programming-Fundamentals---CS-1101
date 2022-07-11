@@ -113,7 +113,7 @@ output
 # part3
 '''
 I feel my peer have seen my hard work of discussion assignment they always give me compliments and appreciate my work also give fair rate. I am trying to make clean format, sample explanation and creative function of math I have learned.
-I found that not fileNamesList of our peers participated in the discussion, according the past four weeks’ discussion assignment. If my peer post before Tuesday, I would have responded whoever post in the discussion forum by checking their code and reading their explanation. I rated them by checking if they used their own words, code and example. I will write my suggestions according their post and rewrite code if it need to be fixed.
+I found that not all of our peers participated in the discussion, according the past four weeks’ discussion assignment. If my peer post before Tuesday, I would have responded whoever post in the discussion forum by checking their code and reading their explanation. I rated them by checking if they used their own words, code and example. I will write my suggestions according their post and rewrite code if it need to be fixed.
 
 
 '''

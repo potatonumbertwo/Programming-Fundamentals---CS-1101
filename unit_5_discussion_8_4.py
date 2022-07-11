@@ -67,7 +67,7 @@ print(any_lowercase3('PotatO'))
 
 # '''
 # This function checks any lowercase in s,if it is not lowercase it will keep running
-# until fileNamesList letter from s to be checked. it returns True if it has at least one lowercase.
+# until all letter from s to be checked. it returns True if it has at least one lowercase.
 # This example returns True because there are 5 lowercase letters.
 # '''
 #
@@ -84,7 +84,7 @@ print(any_lowercase3('PotatO'))
 #
 # '''
 # any_lowercase4 function is check if c in s has any lowercase.If c is lowercase,
-# then return False or True ,and keep running until fileNamesList letter from c to be checked.
+# then return False or True ,and keep running until all letter from c to be checked.
 # If there is any lowercase it will return True.
 # print(any_lowercase4('POTATO')) will return False because there hasn't any lowercase.
 #
@@ -103,7 +103,7 @@ print(any_lowercase3('PotatO'))
 # print(any_lowercase5('potato'))
 #
 # '''
-# any_loercase5 function checks the c.islower is True or False. It's check fileNamesList letter in s hast to be lowercase .
+# any_loercase5 function checks the c.islower is True or False. It's check all letter in s hast to be lowercase .
 # If there is any uppercase it will return False
 #
 # print(any_lowercase5('Potato')) return False, Because the first letter 'P' is not lowercase so return False

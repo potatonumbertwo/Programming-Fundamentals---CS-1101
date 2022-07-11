@@ -67,7 +67,7 @@ greeting_rosie = example1[:14] + 'Rosie' + example1[-1]
 print(greeting_rosie)
 # output :  Good morning,Rosie!
 '''
-Slices fileNamesList the string
+Slices all the string
 '''
 greeting_potato = example1[:]
 print(greeting_potato)

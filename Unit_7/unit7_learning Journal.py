@@ -4,8 +4,7 @@ import json
 # created a dictionary with list as values
 stocks = {'AMD': [28.26, 32.02], 'AAPL': [196.48, 200.00],
           'FB': [200.00, 190.00], 'AMAZ': [1786.00, 1800.00],
-          'SPOT': [149.00, 200.00], 'DlS': [136.78, 130.34],
-          'NASDAQ': [7773.94, 7869.52], 'BABA': [162.06, 160.55]}
+          'SPOT': [149.00, 200.00], 'DlS': [136.78, 130.34]}
 
 
 def invert_dict(dictionary):
@@ -17,6 +16,17 @@ def invert_dict(dictionary):
         for new_key in old_values:
             returned_dict[new_key] = key
     return returned_dict
+
+
+#
+# with open("myfile.json", "w") as fp:
+#     json_string = json.dump(stocks, fp)
+#     print(json_string)
+#
+# pickle_file = open("myfile.txt", "w")
+# dict_to_string = pickle.dumps(stocks)
+#
+# load_string = pickle.loads(dict_to_string)
 
 
 def write_dict(dictionary, file_name):
@@ -31,10 +41,9 @@ def read_dict(file_name):
         return load_handle
 
 
-write_dict(stocks, 'stock_input_file')
+filename = 'stock_dict'
+i = read_dict(filename)
+inverted_stocks = invert_dict(stocks)
+write_dict(inverted_stocks, filename)
 
-dict_was_read_in = read_dict('stock_input_file')
-
-inverted_stocks = invert_dict(dict_was_read_in)
-
-write_dict(inverted_stocks, 'stock_out_file')
+# print(i == stocks)

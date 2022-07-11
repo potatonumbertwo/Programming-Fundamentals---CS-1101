@@ -30,7 +30,7 @@
 #
 #     def missing_letters(new_string):
 #         """ define a function called missing_letters that takes a string parameter
-#         and returns a new string with fileNamesList the letters of the alphabet
+#         and returns a new string with all the letters of the alphabet
 #         that are not in the argument string.
 #         The letters in the returned string should be in alphabetical order."""
 #         filter_letter = []

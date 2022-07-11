@@ -34,7 +34,7 @@ for string in test_dups:
 
 def missing_letters(string):
     """ define a function called missing_letters that takes a string parameter
-    and returns a new string with fileNamesList the letters of the alphabet
+    and returns a new string with all the letters of the alphabet
     that are not in the argument string.
     The letters in the returned string should be in alphabetical order."""
     missing_letters_string = str()
@@ -51,4 +51,4 @@ for word in test_miss:
     if len(missed_letters_in_word) > 1:
         print(word + ' has missed word ' + missed_letters_in_word)
     if len(missed_letters_in_word) == 0:
-        print(word + ' used fileNamesList letters ' + missed_letters_in_word)
+        print(word + ' used all letters ' + missed_letters_in_word)

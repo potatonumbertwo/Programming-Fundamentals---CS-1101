@@ -35,8 +35,9 @@ class Indexer:
     # For each document in the directory read the document into a string
 
     uniqueTermList = []
+    foundStopWords = 0
 
-    def scan_directroy(self):
+    def scan_directroy(self, stop_dict):
         fileNamesList = [fileName for fileName in os.listdir(self.directoryToRead)]
         for fileNameFromList in fileNamesList:
             self.numberOfDocuments += 1
@@ -46,6 +47,8 @@ class Indexer:
             for token in documentContentsString.split():
                 self.tokenList.append(token)
                 self.numberOfTerms += 1
+                if token in stop_dict:
+                    self.foundStopWords += 1
 
     def remove_spot_words(self):
         for i in range(1):
@@ -98,8 +101,8 @@ class Indexer:
         print("The total number of numberOfUniqueTerms: %i" % self.numberOfTerms)
         print("The total number of unique numberOfUniqueTerms: %i" % self.numberOfUniqueTerms)
         print(
-            "Total number of numberOfUniqueTerms found that"
-            " matched one of the stop words program’s stop words list: ", )
+            "Total number of terms found that"
+            " matched one of the stop words program’s stop words list: ", self.foundStopWords)
 
         endTime = time.localtime()
         end = datetime.datetime.now()
@@ -110,7 +113,8 @@ class Indexer:
         stop_dictionary = {}
         with open(Path(__file__).parent / "./unit_4/stopwords.txt") as f:
             for line in f:
-                stop_dictionary[line] = line
+                lineWithoutSlashN = line.replace('\n', '')
+                stop_dictionary[lineWithoutSlashN] = lineWithoutSlashN
         return stop_dictionary
 
 
@@ -118,7 +122,7 @@ indexer = Indexer()
 
 stop_dict = indexer.read_stop_dict()
 
-indexer.scan_directroy()
+indexer.scan_directroy(stop_dict)
 indexer.writeToFile()
 indexer.getUniqueTerms(stop_dict)
 indexer.writeIndexToDisk()

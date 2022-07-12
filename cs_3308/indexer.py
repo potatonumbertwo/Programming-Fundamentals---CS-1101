@@ -37,6 +37,8 @@ class Indexer:
     uniqueTermList = []
     foundStopWords = 0
 
+    termFrequencyDict = {}
+
     def scan_directroy(self, stop_dict):
         fileNamesList = [fileName for fileName in os.listdir(self.directoryToRead)]
         for fileNameFromList in fileNamesList:
@@ -108,6 +110,7 @@ class Indexer:
         end = datetime.datetime.now()
         print('Processing End Time: %.2d:%.2d:%.2d' % (endTime.tm_hour, endTime.tm_min, endTime.tm_sec))
         print("Total running time: " + str((end - self.start)))
+        print("term frequency", self.termFrequencyDict)
 
     def read_stop_dict(self) -> dict:
         stop_dictionary = {}
@@ -116,6 +119,15 @@ class Indexer:
                 lineWithoutSlashN = line.replace('\n', '')
                 stop_dictionary[lineWithoutSlashN] = lineWithoutSlashN
         return stop_dictionary
+
+    def termfrequency(self):
+        for term in self.tokenList:
+            numberOfTimesTermHasBeenSeen = self.termFrequencyDict.get(term)
+            if numberOfTimesTermHasBeenSeen is None:
+                numberOfTimesTermHasBeenSeen = 1
+            else:
+                numberOfTimesTermHasBeenSeen += 1
+            self.termFrequencyDict[term] = numberOfTimesTermHasBeenSeen
 
 
 indexer = Indexer()
@@ -126,4 +138,5 @@ indexer.scan_directroy(stop_dict)
 indexer.writeToFile()
 indexer.getUniqueTerms(stop_dict)
 indexer.writeIndexToDisk()
+indexer.termfrequency()
 indexer.outputPrint()

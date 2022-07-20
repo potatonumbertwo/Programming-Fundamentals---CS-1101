@@ -1,4 +1,5 @@
 import math
+import string
 import sys, os, re
 import time
 import datetime
@@ -38,28 +39,45 @@ class Indexer:
     foundStopWords = 0
 
     termFrequencyDict = {}
+    stop_words_dict = {}
 
-    def scan_directroy(self):
+    def scan_directory(self):
         # read file and using porter stemmer to stem the terms
         porterStemmer = PorterStemmer()
         fileNamesList = [fileName for fileName in os.listdir(self.directoryToRead)]
         fileNamesList.sort()
         for fileNameFromList in fileNamesList:
-            self.numberOfDocuments += 1
-            with open(self.directoryToRead + '/' + fileNameFromList, 'r') as currentFile:
-                self.documentNameList.append(fileNameFromList)
-                documentContentsString = currentFile.read()
-                for token in documentContentsString.split():
-                    # Stem the word
-                    token = porterStemmer.stem(token)
-                    # remove numbers
-                    token = re.sub(r'[0-9]', '', token)
-                    # remove stopwords
+            self.parseFilesAndPopulateTokenList(fileNameFromList, porterStemmer)
 
+    def parseFilesAndPopulateTokenList(self, fileNameFromList: str,
+                                       porterStemmer: PorterStemmer):
+        self.numberOfDocuments += 1
+        with open(self.directoryToRead + '/' + fileNameFromList, 'r') as currentFile:
+            self.documentNameList.append(fileNameFromList)
+            documentContentsString = currentFile.read()
+            for token in documentContentsString.split():
+                # Stem the word
+                token = porterStemmer.stem(token)
+                # remove numbers
+                token = self.cleanToken(token)
+                if len(token) <= 2:
+                    continue
+                if token not in self.stop_words_dict:
                     self.stemmedTokenList.append(token)
                     self.numberOfTerms += 1
-                    # if token in stop_dict:
-                    #     self.foundStopWords += 1
+
+    def cleanToken(self, token) -> str:
+        token = re.sub(r'[0-9]', '', token)
+        token = token.encode('ascii', 'ignore').decode()
+        token = re.sub(r'https*\S+', ' ', token)
+        token = re.sub(r'@\S+', ' ', token)
+        token = re.sub(r'#\S+', ' ', token)
+        token = re.sub(r'\'\w+', '', token)
+        token = re.sub('[%s]' % re.escape(string.punctuation), ' ', token)
+        token = re.sub(r'\w*\d+\w*', '', token)
+        token = re.sub(r'\s{2,}', ' ', token)
+        token = token.replace(" ", "")
+        return token
 
     def write_to_file(self):
         # Open for write a currentFile for the document dictionary
@@ -116,11 +134,13 @@ class Indexer:
 
     def read_stop_dict(self) -> dict:
         # read the porterStemmer.txt into a dictionary
-        stop_dictionary = {}
-        with open(Path(__file__).parent / "./stopwords.txt") as f:
-            for line in f:
-                lineWithoutSlashN = line.replace('\n', '')
-                stop_dictionary[lineWithoutSlashN] = lineWithoutSlashN
+        stop_dictionary: dict = {}
+        # with open(Path(__file__).parent / "./stopwords.txt") as f:
+        #     for line in f:
+        #         lineWithoutSlashN = line.replace('\n', '')
+        for stop_word in self.stop_words:
+            stop_dictionary[stop_word] = stop_word
+        self.stop_words_dict = stop_dictionary
         return stop_dictionary
 
     def term_frequency(self):

@@ -2,9 +2,11 @@ import math
 import sys, os, re
 import time
 import datetime
-from nltk.stem import PorterStemmer
 
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
 from pathlib import Path
+from stop_words import get_stop_words
 
 
 class Indexer:
@@ -16,7 +18,7 @@ class Indexer:
     documentIndex = 0
 
     # initialize list variable
-    tokenList = []
+    stemmedTokenList = []
     documentNameList = []
 
     # Capture the start time of the routine so that we can determine the total running
@@ -28,6 +30,7 @@ class Indexer:
     directoryToRead = "/Users/crowfordcindy/Desktop/git/cs_1101/cs_3308/unit_4/cacm"
     # directoryToRead = "/Users/crowfordcindy/Desktop/git/cs_1101/cs_3308/unit_4/database"
     directoryToWrite = "/Users/crowfordcindy/Desktop/git/cs_1101/cs_3308"
+    stop_words = get_stop_words('english')
 
     # For each document in the directory read the document into a string
 
@@ -36,7 +39,7 @@ class Indexer:
 
     termFrequencyDict = {}
 
-    def scan_directroy(self, stop_dict):
+    def scan_directroy(self):
         # read file and using porter stemmer to stem the terms
         porterStemmer = PorterStemmer()
         fileNamesList = [fileName for fileName in os.listdir(self.directoryToRead)]
@@ -49,11 +52,14 @@ class Indexer:
                 for token in documentContentsString.split():
                     # Stem the word
                     token = porterStemmer.stem(token)
+                    # remove numbers
+                    token = re.sub(r'[0-9]', '', token)
+                    # remove stopwords
 
-                    self.tokenList.append(token)
+                    self.stemmedTokenList.append(token)
                     self.numberOfTerms += 1
-                    if token in stop_dict:
-                        self.foundStopWords += 1
+                    # if token in stop_dict:
+                    #     self.foundStopWords += 1
 
     def write_to_file(self):
         # Open for write a currentFile for the document dictionary
@@ -64,15 +70,15 @@ class Indexer:
             fileToWrite.write(fileNameFromList + ',' + str(self.documentIndex) + os.linesep)
         fileToWrite.close()
 
-    def get_unique_terms(self, stopDict):
+    def get_unique_terms(self):
         # Sort the numberOfTerms in the list
-        self.tokenList.sort()
+        self.stemmedTokenList.sort()
 
         # Identify unique numberOfUniqueTerms in the corpus
-        for token in self.tokenList:
+        for token in self.stemmedTokenList:
 
             tokenNotInTermList = token not in self.uniqueTermList
-            tokenNotInStopDict = token not in stopDict
+            tokenNotInStopDict = token not in self.stop_words
             if tokenNotInTermList and tokenNotInStopDict:
                 self.uniqueTermList.append(token)
                 self.numberOfUniqueTerms += 1
@@ -95,9 +101,10 @@ class Indexer:
         print("The total number of documents processed: %i" % self.numberOfDocuments)
         print("The total number of terms: %i" % self.numberOfTerms)
         print("The total number of unique terms: %i" % self.numberOfUniqueTerms)
-        print(
-            "Total number of terms found that"
-            " matched one of the stop words program’s stop words list: ", self.foundStopWords)
+        # print(" user input")
+        # print(
+        #     "Total number of terms found that"
+        #     " matched one of the stop words program’s stop words list: ", self.foundStopWords)
 
         endTime = time.localtime()
         end = datetime.datetime.now()
@@ -108,9 +115,9 @@ class Indexer:
         # print("tf_idf_weighting" + str(self.tf_idf_weighting()))
 
     def read_stop_dict(self) -> dict:
-        # read the stopwords.txt into a dictionary
+        # read the porterStemmer.txt into a dictionary
         stop_dictionary = {}
-        with open(Path(__file__).parent / "./unit_4/stopwords.txt") as f:
+        with open(Path(__file__).parent / "./stopwords.txt") as f:
             for line in f:
                 lineWithoutSlashN = line.replace('\n', '')
                 stop_dictionary[lineWithoutSlashN] = lineWithoutSlashN
@@ -118,7 +125,7 @@ class Indexer:
 
     def term_frequency(self):
         # term frequency stored in dictionary
-        for term in self.tokenList:
+        for term in self.stemmedTokenList:
             numberOfTimesTermHasBeenSeen = self.termFrequencyDict.get(term)
             if numberOfTimesTermHasBeenSeen is None:
                 numberOfTimesTermHasBeenSeen = 1
@@ -126,22 +133,23 @@ class Indexer:
                 numberOfTimesTermHasBeenSeen += 1
             self.termFrequencyDict[term] = numberOfTimesTermHasBeenSeen
 
+    def doucument_frequecy(self):
+
+        # search t term in numbers of document
+        documentFrequency = 0
+
+        return documentFrequency
+
     def inverse_document_frequency(self):
         # calculate the inverse document
         idf = math.log(self.numberOfDocuments / len(self.termFrequencyDict))
         return idf
 
-    # def tf_idf_weighting(self):
-    # for i in self.tokenList:
+    # def tf_idf_weighting(self, user_input):
+    # for i in self.stemmedTokenList:
     #     tf_idf = i * self.inverseDocumentFrequency()
     # return tf_idf
 
-
-indexer = Indexer()
-stop_dict = indexer.read_stop_dict()
-indexer.scan_directroy(stop_dict)
-indexer.write_to_file()
-indexer.get_unique_terms(stop_dict)
-indexer.write_index_to_disk()
-indexer.term_frequency()
-indexer.output_print()
+    def bag_of_words(self):
+        user_input = input("Enter your terms: ").split()
+        print(user_input)
